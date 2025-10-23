@@ -1,0 +1,81 @@
+<div class="small-container cart-page">
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+        </tr>
+        {{#each orderDetails}}
+        <tr id="item_{{this._id}}">
+            <td>
+                <div class="cart-info">
+                    <img src="/uploads/{{this.product._img}}">
+                    <div>
+                        <p>Red Printed Tshirt</p>
+                        <small>Price: ${{this.product._price}}</small>
+                        <br>
+                        <a onclick="updateItem({{this._id}}, 'remove')" style="cursor: pointer">Remove</a>
+                    </div>
+                </div>
+            </td>
+            <td><input type="number" value="{{this._qty}}" onchange="updateItem({{this._id}}, 'update')"></td>
+            <td>${{this._price}}</td>
+        </tr>
+        {{/each}}
+    </table>
+
+    <div class="total-price">
+        <table>
+            {{!-- <tr>
+                <td>Subtotal</td>
+                <td>175.000$</td>
+            </tr>
+            <tr>
+                <td>Tax</td>
+                <td>25.00$</td>
+            </tr> --}}
+            <tr>
+                <td>Total</td>
+                <td id="total">${{order._price}}</td>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="order_btn">
+        <a href="/order/cart/confirm" >Order</a>
+    </div>
+
+</div>
+
+<script>
+    async function updateItem(id, type) {
+        const item = document.getElementById('item_'+id);
+        const total = document.getElementById('total');
+        const value = item.children[1].children[0].value;
+
+        let formData = new FormData();
+        formData.append('_id', id);
+        formData.append('_type', type);
+        formData.append('_value', value);
+
+        await fetch('/order/cart/update', {
+            method: 'post',
+            body: formData,
+        })
+        .then(async response => {
+            const data = await response.json(); // Parse the JSON data
+            const total = document.getElementById('total');
+            const item = document.getElementById('item_'+id);
+            if(response.status == 200) {
+                if(data.type == 'remove'){
+                    item.remove();
+                }
+                else if(data.type == 'update'){
+                    item.children[2].innerHTML = '$' + data.item_total;
+                }
+                total.innerHTML = '$' + data.total
+            }
+        })
+    }
+</script>

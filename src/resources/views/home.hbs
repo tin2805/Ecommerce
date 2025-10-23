@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RedStore | Ecommerce Website Design</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <a href="index.html"><img src="img/logo.png" width="125px"></a>
+                </div>
+                <nav>
+                    <ul id="MenuItems">
+                        <li><a href="/home">Home</a></li>
+                        <li><a href="/product">Products</a></li>
+                        <li><a href="">About</a></li>
+                        <li><a href="">Contact</a></li>
+                        {{#if_eq user null}}
+                        <li><a href="/account">Account</a></li>
+                        {{/if_eq}}
+                    </ul>
+                </nav>
+                {{#if user}}
+                <div class="dropdown">
+                    <button class="dropbtn">
+                        <img src="" alt="">
+                    </button>
+                    <div class="dropdown-content">
+                        <p>
+                            Welcome, {{user.email}}
+                        </p>
+                        <a href="#">Info</a>
+                        <a href="/order/cart" class="cart">Cart <span>{{user.cart}}</span></a>
+                        {{#if_eq user.role 'admin'}}
+                        <a href="/product/create">Create Product</a>
+                        <a href="/product/all">All Products</a>
+                        <a href="/order/create">Create Order</a>
+                        <a href="/order/all">All Orders</a>
+                        {{/if_eq}}
+                        <a href="/order">Order</a>
+                        <a href="/account/logout">Logout</a>
+                    </div>
+                </div>
+                {{/if}}
+                <img src="img/menu.png" class="menu-icon" 
+                onclick="menutoggle()">
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <h1>Give Your Workout<br> A New Style!</h1>
+                    <p>Success ins't always about greatness. It's about
+                        consistency. Consistent <br>hard work gains success. Greatness
+                        will come. </p>
+                    <a href="" class="btn">Explore Now &#8594;</a>
+                </div>
+                <div class="col-2">
+                    <img src="img/image1.png">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ------------- featured categorries ---------------- -->
+    <div class="categories">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-3">
+                    <img src="img/category-1.jpg">
+                </div>
+                <div class="col-3">
+                    <img src="img/category-2.jpg">
+                </div>
+                <div class="col-3">
+                    <img src="img/category-3.jpg">
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- ------------- featured products ---------------- -->
+    <div class="small-container">
+        <h2 class="title">Featured Products</h2>
+        <div class="row">
+            <div class="col-4">
+                <a href="products_detal.html"><img src="img/product-1.jpg"></a>
+                <a href="products_detal.html"><h4>Red Printed T-Shirt</h4></a>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p>$50.00</p>
+            </div>
+            <div class="col-4">
+                <img src="img/product-2.jpg">
+                <h4>Red Printed T-Shirt</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p>$50.00</p>
+            </div>
+            <div class="col-4">
+                <img src="img/product-3.jpg">
+                <h4>Red Printed T-Shirt</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                </div>
+                <p>$50.00</p>
+            </div>
+            <div class="col-4">
+                <img src="img/product-4.jpg">
+                <h4>Red Printed T-Shirt</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p>$50.00</p>
+            </div>
+        </div>
+        <h2 class="title">Latest Products</h2>
+        <div class="row">
+            <div class="col-4">
+                <img src="img/product-5.jpg">
+                <h4>Red Printed T-Shirt</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p>$50.00</p>
+            </div>
+            <div class="col-4">
+                <img src="img/product-6.jpg">
+                <h4>Red Printed T-Shirt</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p>$50.00</p>
+            </div>
+            <div class="col-4">
+                <img src="img/product-7.jpg">
+                <h4>Red Printed T-Shirt</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                </div>
+                <p>$50.00</p>
+            </div>
+            <div class="col-4">
+                <img src="img/product-8.jpg">
+                <h4>Red Printed T-Shirt</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p>$50.00</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <img src="img/product-9.jpg">
+                <h4>Red Printed T-Shirt</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p>$50.00</p>
+            </div>
+            <div class="col-4">
+                <img src="img/product-10.jpg">
+                <h4>Red Printed T-Shirt</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p>$50.00</p>
+            </div>
+            <div class="col-4">
+                <img src="img/product-11.jpg">
+                <h4>Red Printed T-Shirt</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                </div>
+                <p>$50.00</p>
+            </div>
+            <div class="col-4">
+                <img src="img/product-12.jpg">
+                <h4>Red Printed T-Shirt</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p>$50.00</p>
+            </div>
+        </div>
+    </div>
+    <!-- ------------ offer -------------- -->
+    <div class="offer">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-2"><img src="img/exclusive.png" class="offer-img"> </div>
+                <div class="col-2">
+                    <p>Exclusive Availabble on RedStore</p>
+                    <h1>Smart Band 4</h1>
+                    <small>
+                        The Mi Smart Band 4 features a 39.9% larger (than Mi Band 4) AMOLED color full-touch display
+                        with
+                        adjustable brightness, so everything is clear as can be</small>
+                    <a href="" class="btn">Buy Now &#8594;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ------------ testimonial -------------- -->
+    <div class="testimonial">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-3">
+                    <i class="fa fa-qoute-lef"></i>
+                    <p>Abilities or he perfectly pretended so strangers be exquisite. Oh to another chamber pleased
+                        imagine do in. Went me rank at last loud shot an draw. Excellent so to no sincerity smallness.
+                        Removal request delight if on he we</p>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                    <img src="img/user-1.png">
+                    <h3>Đạt 1 Phích</h3>
+                </div>
+                <div class="col-3">
+                    <i class="fa fa-qoute-lef"></i>
+                    <p>Abilities or he perfectly pretended so strangers be exquisite. Oh to another chamber pleased
+                        imagine do in. Went me rank at last loud shot an draw. Excellent so to no sincerity smallness.
+                        Removal request delight if on he we</p>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                    <img src="img/user-2.png">
+                    <h3>An Nguyen</h3>
+                </div>
+                <div class="col-3">
+                    <i class="fa fa-qoute-lef"></i>
+                    <p>Abilities or he perfectly pretended so strangers be exquisite. Oh to another chamber pleased
+                        imagine do in. Went me rank at last loud shot an draw. Excellent so to no sincerity smallness.
+                        Removal request delight if on he we</p>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                    <img src="img/user-3.png">
+                    <h3>Quang Hoang</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ------------------- brands --------------------- -->
+    <div class="brands">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-5">
+                    <img src="img/logo-godrej.png">
+                </div>
+                <div class="col-5">
+                    <img src="img/logo-oppo.png">
+                </div>
+                <div class="col-5">
+                    <img src="img/logo-coca-cola.png">
+                </div>
+                <div class="col-5">
+                    <img src="img/logo-paypal.png">
+                </div>
+                <div class="col-5">
+                    <img src="img/logo-philips.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ------------footer----------- -->
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android and ios mobile phone</p>
+                    <div class="app-logo">
+                        <img src="img/play-store.png">
+                        <img src="img/app-store.png">
+                    </div>
+                </div>
+                <div class="footer-col-2">
+                    <img src="img/logo-white.png">
+                    <p>Our Purpose Is To Sustainably Make the Pleasure and
+                        Benefits of Sports Accessible to the Many</p>
+                </div>
+                <div class="footer-col-3">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li>Coupons</li>
+                        <li>Blog Post</li>
+                        <li>Return Policy</li>
+                        <li>Join Affiliate</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Instagram</li>
+                        <li>Youtube </li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="Copyright">Copyright 2020 - By QuocHuy</p>
+        </div>
+    </div>
+    <div class="notification">
+        <div class="notification__message message--info">
+            <h1>Info</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+
+            <!-- x icon through a path element -->
+            <button aria-labelledby="button-dismiss">
+                <span id="button-dismiss" hidden>Dismiss</span>
+                <svg viewBox="0 0 100 100" width="10" height="10">
+                    <!-- group to style the path -->
+                    <g
+                        stroke="currentColor"
+                        stroke-width="6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        fill="none">
+                        <!-- group to center and rotate the + sign to show an x sign instead -->
+                        <g transform="translate(50 50) rotate(45)">
+                            <!-- path describing two perpendicular lines -->
+                            <path
+                                d="M 0 -30 v 60 z M -30 0 h 60">
+                            </path>
+                        </g>
+                    </g>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <!-- ------------------- js for toggle menu-------------- -->
+    <script>
+        var MenuItems = document.getElementById("MenuItems");
+        
+        //MenuItems.style.maxHeight = "0px";
+
+        function menutoggle(){
+            if(MenuItems.style.maxHeight == "0px")
+            {
+                MenuItems.style.maxHeight = "200px";
+            }
+        else
+            {
+                MenuItems.style.maxHeight = "0px";
+            }
+        }
+
+    </script>
+    <script>
+        // utility function returning a random item from the input array
+        const randomItem = arr => arr[Math.floor(Math.random() * arr.length)];
+
+        // possible values for the message title and modifier
+        const messageTitle = [
+        'info',
+        'success',
+        'warning',
+        'danger',
+        ];
+
+        // possible values for the body of the message
+        // end result of the emmet shortcut p*10>lorem10
+        const messageText = [
+        '{{notification.text}}'
+        ];
+
+        /* logic
+        - create a message
+        - show the message
+        - allow to dismiss the message through the dismiss button
+
+        once the message is dismissed the idea is to go through the loop one more time, with a different title and text values
+        */
+        const notification = document.querySelector('.notification');
+        // function called when the button to dismiss the message is clicked
+        function dismissMessage() {
+        // remove the .received class from the .notification widget
+        notification.classList.remove('received');
+        // call the generateMessage function to show another message after a brief delay
+        //generateMessage();
+        }
+
+        // function showing the message
+        function showMessage() {
+        // add a class of .received to the .notification container
+        notification.classList.add('received');
+
+        // attach an event listener on the button to dismiss the message
+        // include the once flag to have the button register the click only one time
+        const button = document.querySelector('.notification__message button');
+        button.addEventListener('click', dismissMessage, { once: true });
+        }
+
+        // function generating a message with a random title and text
+        function generateMessage() {
+        // after an arbitrary and brief delay create the message and call the function to show the element
+            const delay = Math.floor(Math.random() * 1000) + 500;
+            const timeoutID = setTimeout(() => {
+
+
+                // update the message with the random values and changing the class name to the title's option
+                const message = document.querySelector('.notification__message');
+
+                message.querySelector('h1').textContent = '{{notification.type}}';
+                message.querySelector('p').textContent = '{{notification.text}}';
+                message.className = `notification__message message--${'{{notification.type}}'}`;
+
+                // call the function to show the message
+                showMessage();
+                clearTimeout(timeoutID);
+            }, delay);
+
+            setTimeout(() => {
+                notification.classList.remove('received');
+            }, delay + 5000);
+        }
+
+        // immediately call the generateMessage function to kickstart the loop
+        if('{{notification}}'){
+            generateMessage();
+        }
+    </script>
+</body>
+</html>

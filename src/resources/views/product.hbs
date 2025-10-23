@@ -1,0 +1,36 @@
+<div class="small-container">
+
+    <div class="row row-2">
+        <h2>All Products</h2>
+        <select>
+            <option>Default Shop</option>
+            <option>Short by price</option>
+            <option>Short by popularity</option>
+            <option>Short by Rating</option>
+            <option>Short by Sale</option>
+        </select>
+    </div>
+
+    <div class="row">
+        {{#each products}}
+        <div class="col-6 col-4">
+            <a href="products_detal.html"><img src="/uploads/{{this._img}}"></a>
+            <h4>{{this._name}}</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <p>${{this._price}}</p>
+        </div>
+        {{/each}}
+    </div>
+    <div class="page-btn">
+        {{#each indexPage}}
+        <span><a href="?page={{this}}">{{this}}</a></span>
+        {{/each}}
+        <span>&#8594;</span>
+    </div>
+</div>
