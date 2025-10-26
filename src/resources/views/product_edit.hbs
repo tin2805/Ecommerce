@@ -1,8 +1,5 @@
-<div class="small-container">
-
-
-
-    <div class="row">
+<div class="small-container product">
+    <div class="row product-form">
         <form method="POST" action="/product/update/{{product._id}}" enctype="multipart/form-data">
             <label for="name">Product Name</label>
             <input type="text" name="_name" value="{{product._name}}">
@@ -17,7 +14,9 @@
             <label for="name">Image</label>
             <img src="/uploads/{{product._img}}">
             <input type="file" name="_img">
-            <button type="submit" class="btn">Save</button>
+            <div class="product-btn">
+                <button type="submit" class="btn">Save</button>
+            </div>
         </form>
     </div>
 

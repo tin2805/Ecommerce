@@ -1,10 +1,8 @@
 const User = require('../models/User');
-
 const bcrypt = require('bcrypt');
-
 const responseNotification = require('../notifications/responseNotification');
-
 const jwt = require('jsonwebtoken');
+const { mongooseToObject } = require('../../helpers/mongoose');
 
 class AccountController {
     index (req, res) {
@@ -62,6 +60,22 @@ class AccountController {
     logout(req, res) {
         res.cookie('jwt', '', {maxAge: 1});
         res.redirect('/home');
+    }
+
+    //Info
+    info(req, res, next) {
+        const user = User.findById(res.locals.user._id);
+        var notification = req.flash('notification');
+        notification = notification ? notification[0] : notification;
+
+        user.then(
+            user => {
+                res.render('info', {
+                    user: mongooseToObject(user),
+                    notification: notification
+                })
+            })
+            .catch(next)
     }
 
 }

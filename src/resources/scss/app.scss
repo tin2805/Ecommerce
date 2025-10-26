@@ -1,4 +1,5 @@
 @use 'variables';
+@use 'products';
 @use 'notification';
 h1 {
     color: variables.$red-color; 

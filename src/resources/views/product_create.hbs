@@ -1,8 +1,5 @@
-<div class="small-container">
-
-
-
-    <div class="row">
+<div class="small-container product">
+    <div class="row product-form">
         <form method="POST" action="/product/insert" enctype="multipart/form-data">
             <label for="name">Product Name</label>
             <input type="text" name="_name" placeholder="">
@@ -16,7 +13,9 @@
             <input type="number" name="_price" placeholder="">
             <label for="name">Image</label>
             <input type="file" name="_img">
-            <button type="submit" class="btn">Create</button>
+            <div class="product-btn">
+                <button type="submit" class="btn">Create</button>
+            </div>
         </form>
     </div>
 

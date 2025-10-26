@@ -44,6 +44,28 @@ class ProductsController {
         // return res.render('product_detail', );
     }
 
+    //Admin
+
+    productAdmin(req, res, next) {
+        const page = parseInt(req.query.page) || 1; // Default to page 1
+        const limit = parseInt(req.query.limit) || 8; // Default to 10 items per page
+        const skip = (page - 1) * limit;
+        let products = Product.find({});
+        const maxPage = products ? Math.round(Object.keys(products).length / limit) : 1;
+        let indexPage = [];
+        for(let i = 1; i <= maxPage; i++) {
+            indexPage.push(i);
+        }
+        products.skip(skip).limit(limit)
+            .then(products => {
+                res.render('product', { 
+                    products: mutipleMongooseToObject(products),
+                    indexPage: indexPage
+                })
+            })
+            .catch(next);
+    }
+
     create(req, res) {
         var notification = req.flash('notification');
         notification = notification ? notification[0] : notification;

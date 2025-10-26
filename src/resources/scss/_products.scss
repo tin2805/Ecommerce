@@ -1,0 +1,15 @@
+.product {
+    display: flex;
+    justify-content: center;
+    .product-form {
+        width: 75%;
+        .product-btn{
+            width: 100%;
+            text-align: center;
+            .btn {
+                width: 50%;
+            }
+        }
+    }
+
+}

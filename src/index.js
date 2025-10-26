@@ -6,11 +6,12 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var flash = require('connect-flash');
 const fileUpload = require("express-fileupload");
-// const port = process.env.PORT || 8080;
+const dotenv = require("dotenv");
 
+dotenv.config();
 const app = express();
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 
 const route = require('./routes');

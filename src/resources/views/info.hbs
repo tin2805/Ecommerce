@@ -1,0 +1,19 @@
+<div class="small-container product">
+    <div class="row product-form">
+        <form method="POST" action="/account/update" enctype="multipart/form-data">
+            <label for="fullname">Full Name</label>
+            <input type="text" name="fullname" value="{{user.fullname}}">
+            <label for="email">Email</label>
+            <input type="email" name="email" value="{{user.email}}">
+            <label for="date">Date of Birth</label>
+            <input type="date" name="date" value="{{user.date}}">
+            <label for="name">Avatar</label>
+            <img src="/avatars/{{user.avatar}}">
+            <input type="file" name="avatar">
+            <div class="product-btn">
+                <button type="submit" class="btn">Update</button>
+            </div>
+        </form>
+    </div>
+
+</div>

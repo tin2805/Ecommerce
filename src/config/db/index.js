@@ -4,7 +4,7 @@ async function connect() {
 
     try {
         // await mongoose.connect('mongodb://127.0.0.1:27017/loyal');
-        await mongoose.connect('mongodb+srv://tin2805:TrungTin123@cluster0.2nifahj.mongodb.net/loyal');
+        await mongoose.connect(process.env.MONGO_URL);
         console.log('Connect Successfully');
 
     } catch (error) {
