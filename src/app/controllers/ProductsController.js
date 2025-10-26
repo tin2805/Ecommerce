@@ -63,6 +63,37 @@ class ProductsController {
                 console.log(error);
         });
     }
+
+    edit(req, res, next) {
+        var product = Product.findById(req.params.id);
+        var notification = req.flash('notification');
+        notification = notification ? notification[0] : notification;
+        product.then(
+            product => {
+                res.render('product_edit', {
+                    product: mongooseToObject(product),
+                    notification: notification
+                })
+            })
+            .catch(next)
+    }
+
+    async update(req, res) {
+        const formData = req.body;
+        var product = await Product.findById(req.params.id);
+        var notification = responseNotification.response('success', 'Update product success', 'product');
+        if(req._img) {
+            const upload = uploadFile.upload(req.files._img);
+            formData._img = upload;
+        }
+        console.log(formData)
+        req.flash('notification', notification);
+        await product.updateOne(formData)
+            .then(() => res.redirect('/product/'))
+            .catch(error => {
+                console.log(error);
+        });
+    }
 }
 
 

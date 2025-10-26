@@ -1,0 +1,24 @@
+<div class="small-container">
+
+
+
+    <div class="row">
+        <form method="POST" action="/product/update/{{product._id}}" enctype="multipart/form-data">
+            <label for="name">Product Name</label>
+            <input type="text" name="_name" value="{{product._name}}">
+            <label for="name">Description</label>
+            <input type="text" name="_desc" value="{{product._desc}}">
+            <label for="name">Category</label>
+            <input type="text" name="_category" value="{{product._category}}">
+            <label for="name">Brand</label>
+            <input type="text" name="_brand" value="{{product._brand}}">
+            <label for="name">Price</label>
+            <input type="number" name="_price" value="{{product._price}}">
+            <label for="name">Image</label>
+            <img src="/uploads/{{product._img}}">
+            <input type="file" name="_img">
+            <button type="submit" class="btn">Save</button>
+        </form>
+    </div>
+
+</div>
