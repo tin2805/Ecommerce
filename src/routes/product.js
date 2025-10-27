@@ -4,6 +4,7 @@ const adminRouter = express.Router();
 const productsController = require('../app/controllers/ProductsController');
 const {checkAdmin} = require('../app/middleware/adminMiddleware');
 
+router.get('/copy/:id', checkAdmin, productsController.copy);
 router.post('/destroy/:id', checkAdmin, productsController.destroy);
 router.post('/update/:id', checkAdmin, productsController.update);
 router.get('/edit/:id', checkAdmin, productsController.edit);

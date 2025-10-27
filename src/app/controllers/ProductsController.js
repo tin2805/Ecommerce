@@ -119,7 +119,6 @@ class ProductsController {
     }
 
     async destroy(req, res) {
-        const formData = req.body;
         var product = await Product.findById(req.params.id);
         var notification = responseNotification.response('success', 'Destroy product success', 'product');
         req.flash('notification', notification);
@@ -127,6 +126,21 @@ class ProductsController {
             .then(() => res.redirect('/product/admin'))
             .catch(error => {
                 console.log(error);
+        });
+    }
+
+    async copy(req, res) {
+            var product = await Product.findById(req.params.id).select('_name _desc _category _brand _price _img');
+            product = mongooseToObject(product);
+            delete product._id;
+            var notification = responseNotification.response('success', 'Copy product success', 'product');
+            req.flash('notification', notification);
+            const newProduct = new Product(product);
+            console.log(newProduct)
+            await newProduct.save()
+                .then(() => res.redirect('/product/admin'))
+                .catch(error => {
+                    console.log(error);
         });
     }
 }
