@@ -101,3 +101,36 @@ h1 {
     height: 50px;
   }
 }
+
+.product-admin {
+  display: grid;
+  grid-template-areas:
+    "item"
+    "item";
+  .product-admin-items {
+    display: grid;
+    grid-template-areas:
+    "img name rating price function";
+    height: 50px;
+    grid-template-columns: 1fr 2fr 2fr 1fr 1fr;
+    gap: 3px;
+    padding: 5px;
+    img {
+      width: 50px;
+      height: 100%;
+    }
+    .function{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      column-gap: 15px;
+      .delete{
+        button{
+          border: none;
+          background-color: transparent;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

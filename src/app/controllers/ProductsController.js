@@ -58,7 +58,7 @@ class ProductsController {
         }
         products.skip(skip).limit(limit)
             .then(products => {
-                res.render('product', { 
+                res.render('product_admin', { 
                     products: mutipleMongooseToObject(products),
                     indexPage: indexPage
                 })
@@ -110,10 +110,21 @@ class ProductsController {
             const upload = uploadFile.upload(req.files._img, 'uploads');
             formData._img = upload;
         }
-        console.log(formData)
         req.flash('notification', notification);
         await product.updateOne(formData)
-            .then(() => res.redirect('/product/'))
+            .then(() => res.redirect('/product/admin'))
+            .catch(error => {
+                console.log(error);
+        });
+    }
+
+    async destroy(req, res) {
+        const formData = req.body;
+        var product = await Product.findById(req.params.id);
+        var notification = responseNotification.response('success', 'Destroy product success', 'product');
+        req.flash('notification', notification);
+         await product.deleteOne()
+            .then(() => res.redirect('/product/admin'))
             .catch(error => {
                 console.log(error);
         });
