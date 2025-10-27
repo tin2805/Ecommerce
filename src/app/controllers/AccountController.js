@@ -3,6 +3,8 @@ const bcrypt = require('bcrypt');
 const responseNotification = require('../notifications/responseNotification');
 const jwt = require('jsonwebtoken');
 const { mongooseToObject } = require('../../helpers/mongoose');
+const uploadFile = require('../middleware/uploadFile');
+const path = require('path');
 
 class AccountController {
     index (req, res) {
@@ -64,18 +66,41 @@ class AccountController {
 
     //Info
     info(req, res, next) {
-        const user = User.findById(res.locals.user._id);
-        var notification = req.flash('notification');
+        let user = User.findById(res.locals.user._id);
+        let notification = req.flash('notification');
         notification = notification ? notification[0] : notification;
-
+        if(user.date) {
+            const date = new Date(user.date);
+            formatted = `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getDate()).padStart(2, '0')}`;
+        }
         user.then(
             user => {
                 res.render('info', {
                     user: mongooseToObject(user),
-                    notification: notification
+                    notification: notification,
                 })
             })
             .catch(next)
+    }
+
+    async update(req, res) {
+        const formData = req.body;
+        var notification = responseNotification.response('success', 'Update success', 'account')
+
+        const user = await User.findById(res.locals.user._id);
+
+        if(req.files) {
+            console.log('cak')
+            const avatar = uploadFile.upload(req.files.avatar, 'avatars');
+            formData.avatar = avatar;
+        }
+        // formData.password = bcrypt.hashSync(formData.password, 10);
+        req.flash('notification', notification);
+        await user.updateOne(formData)
+            .then(() => res.redirect('/account/info'))
+            .catch(error => {
+                
+            });
     }
 
 }

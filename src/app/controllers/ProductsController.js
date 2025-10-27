@@ -75,8 +75,10 @@ class ProductsController {
     insert(req, res) {
         const formData = req.body;
         var notification = responseNotification.response('success', 'Create product success', 'product');
-        const upload = uploadFile.upload(req.files._img);
-        formData._img = upload;
+        if(req.files) {
+            const upload = uploadFile.upload(req.files._img, 'uploads');
+            formData._img = upload;
+        }
         const newProduct = new Product(formData);
         req.flash('notification', notification);
         newProduct.save()
@@ -104,8 +106,8 @@ class ProductsController {
         const formData = req.body;
         var product = await Product.findById(req.params.id);
         var notification = responseNotification.response('success', 'Update product success', 'product');
-        if(req._img) {
-            const upload = uploadFile.upload(req.files._img);
+        if(req.files) {
+            const upload = uploadFile.upload(req.files._img, 'uploads');
             formData._img = upload;
         }
         console.log(formData)

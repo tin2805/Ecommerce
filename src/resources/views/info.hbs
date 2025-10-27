@@ -8,7 +8,7 @@
             <label for="date">Date of Birth</label>
             <input type="date" name="date" value="{{user.date}}">
             <label for="name">Avatar</label>
-            <img src="/avatars/{{user.avatar}}">
+            <img src="/img/avatars/{{user.avatar}}">
             <input type="file" name="avatar">
             <div class="product-btn">
                 <button type="submit" class="btn">Update</button>
@@ -17,3 +17,30 @@
     </div>
 
 </div>
+
+<script>
+    const dateInput = document.querySelector('input[name="date"]'); // Assuming your input has id="myDateInput"
+    dateInput.value = stringToDate('{{user.date}}');
+
+    function stringToDate(dateString) {
+        // Remove the time zone name if present
+        const cleaned = dateString.replace(/\s\(.+\)$/, '');
+        
+        // Parse the cleaned string into a Date object
+        const date = new Date(cleaned);
+        
+        // Check if the date is valid
+        if (isNaN(date)) {
+            return "Invalid date";
+        }
+
+        // Format to yyyy-MM-dd
+        const yyyy = date.getFullYear();
+        const mm = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+        const dd = String(date.getDate()).padStart(2, '0');
+
+        return `${yyyy}-${mm}-${dd}`;
+    }
+
+
+</script>

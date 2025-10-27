@@ -33,13 +33,13 @@
                 {{#if user}}
                 <div class="dropdown">
                     <button class="dropbtn">
-                        <img src="" alt="">
+                        <img src="/img/avatars/{{user.avatar}}" alt="">
                     </button>
                     <div class="dropdown-content">
                         <p>
                             Welcome, {{user.email}}
                         </p>
-                        <a href="#">Info</a>
+                        <a href="/account/info">Info</a>
                         <a href="/order/cart" class="cart">Cart <span>{{user.cart}}</span></a>
                         {{#if_eq user.role 'admin'}}
                         <a href="/product/create">Create Product</a>
