@@ -294,7 +294,6 @@ h1 {
 .product-admin .product-admin-items .function {
   display: flex;
   justify-content: center;
-  align-items: center;
   column-gap: 15px;
 }
 .product-admin .product-admin-items .function .delete button {
@@ -303,4 +302,54 @@ h1 {
   cursor: pointer;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22../../resources/scss/_notification.scss%22,%22../../resources/scss/_products.scss%22,%22../../resources/scss/app.scss%22,%22../../resources/scss/_variables.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAQ;ACAR;EACI;EACA;;AACA;EACI;;AACA;EACI;EACA;;AACA;EACI;;AAGR;EACI;;;ADXZ;EACE;EACA;EACA;;;AAEF;EACE;EACA;EACA;;;AAEF;AACA;EACE;EACA;EACA;EACA;AACA;EACA;EACA;EACA;EACA;AACA;EACA;AACA;EACA;;;AAGF;AACA;EACE;EACA;EACA;EACA;;;AAEF;AAAA;AAAA;AAGA;EACE;;;AAEF;EACE;;;AAEF;AACA;EACE;IACE;;EAEF;IACE;;;AAGJ;AACA;EACE;IACE;;EAEF;IACE;;EAEF;IACE;;;AAIJ;AAAA;AAAA;AAAA;AAIA;EACE;EACA;EACA;EACA;EACA;AACA;EACA;EACA;EACA;EACA;AACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAEF;EACE;EACA;EACA;;;AAEF;EACE;EACA;EACA;;;AAEF;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAEF;EACE;EACA;EACA;;;AAGF;AACA;EACE;EACA;EACA;;;AAEF;AAAA;AAAA;AAGA;EACE;EACA;EACA;EACA;;;AAEF;EACE;EACA;EACA;EACA;;;AAEF;EACE;EACA;EACA;EACA;;;AAEF;EACE;EACA;EACA;EACA;;;AEhJF;EACI,OCJS;EDKT;;;AAEJ;EACE;;AACA;EACE;EACA;EACA;EACA;EACA;;;AAIJ;AACA;EAEE;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AACA;EACE;EACA;EACA;EACA;;;AAIJ;AACA;EACE;EACA;EACA;EACA;EACA;EACA;;AACA;EACE;EACA;;;AAIJ;AACA;EACE;EACA;EACA;EACA;;;AAEF;EACI;EACA;;AACA;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAIN;AACA;EACE;;;AAGF;AACA;EACE;;;AAGF;AAKA;EACE;EACA;EACA;;AACA;EACE;EACA;EACA;EACA;EACA;EACA;EACA;;;AAIJ;EACE;EACA,qBACE;;AAEF;EACE;EACA,qBACA;EACA;EACA;EACA;EACA;;AACA;EACE;EACA;;AAEF;EACE;EACA;EACA;EACA;;AAEE;EACE;EACA;EACA%22,%22file%22:%22app.css%22%7D */
+.order-admin .product-admin-items {
+  grid-template-areas: "id price status type function detail";
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.order-admin .dropbtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 0%;
+  width: 100px;
+  height: 40px;
+}
+.order-admin .dropbtn:hover, .order-admin .dropbtn:focus {
+  background-color: #2980B9;
+}
+.order-admin .dropdown {
+  position: relative;
+  display: inline-block;
+}
+.order-admin .show {
+  display: block;
+}
+
+.order-detail {
+  position: absolute;
+  left: 0;
+  top: 50px;
+  display: none;
+  width: 100%;
+  background-color: antiquewhite;
+  text-align: center;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.order-detail .order-detail-item {
+  display: grid;
+  grid-template-areas: "item item item item";
+  grid-template-columns: 1fr 2fr 2fr 2fr;
+}
+.order-detail .order-detail-item p {
+  border: 1px solid #000;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22../../resources/scss/_notification.scss%22,%22../../resources/scss/_products.scss%22,%22../../resources/scss/app.scss%22,%22../../resources/scss/_variables.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAQ;ACAR;EACI;EACA;;AACA;EACI;;AACA;EACI;EACA;;AACA;EACI;;AAGR;EACI;;;ADXZ;EACE;EACA;EACA;;;AAEF;EACE;EACA;EACA;;;AAEF;AACA;EACE;EACA;EACA;EACA;AACA;EACA;EACA;EACA;EACA;AACA;EACA;AACA;EACA;;;AAGF;AACA;EACE;EACA;EACA;EACA;;;AAEF;AAAA;AAAA;AAGA;EACE;;;AAEF;EACE;;;AAEF;AACA;EACE;IACE;;EAEF;IACE;;;AAGJ;AACA;EACE;IACE;;EAEF;IACE;;EAEF;IACE;;;AAIJ;AAAA;AAAA;AAAA;AAIA;EACE;EACA;EACA;EACA;EACA;AACA;EACA;EACA;EACA;EACA;AACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAEF;EACE;EACA;EACA;;;AAEF;EACE;EACA;EACA;;;AAEF;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAEF;EACE;EACA;EACA;;;AAGF;AACA;EACE;EACA;EACA;;;AAEF;AAAA;AAAA;AAGA;EACE;EACA;EACA;EACA;;;AAEF;EACE;EACA;EACA;EACA;;;AAEF;EACE;EACA;EACA;EACA;;;AAEF;EACE;EACA;EACA;EACA;;;AEhJF;EACI,OCJS;EDKT;;;AAEJ;EACE;;AACA;EACE;EACA;EACA;EACA;EACA;;;AAIJ;AACA;EAEE;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AACA;EACE;EACA;EACA;EACA;;;AAIJ;AACA;EACE;EACA;EACA;EACA;EACA;EACA;;AACA;EACE;EACA;;;AAIJ;AACA;EACE;EACA;EACA;EACA;;;AAEF;EACI;EACA;;AACA;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAIN;AACA;EACE;;;AAGF;AACA;EACE;;;AAGF;AAKA;EACE;EACA;EACA;;AACA;EACE;EACA;EACA;EACA;EACA;EACA;EACA;;;AAIJ;EACE;EACA,qBACE;;AAEF;EACE;EACA,qBACA;EACA;EACA;EACA;EACA;;AACA;EACE;EACA;;AAEF;EACE;EACA;EACA;;AAEE;EACE;EACA;EACA;;;AAOR;EACI;EACA;;AAEJ;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAGF;EACE;;AAGF;EACE;EACA;;AAGF;EAAO;;;AAET;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AACA;EACE;EACA;EACA;;AACA;EACE%22,%22file%22:%22app.css%22%7D */

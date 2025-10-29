@@ -1,0 +1,77 @@
+<div class="small-container">
+
+    <div class="row row-2">
+        <h2>All Products</h2>
+        <select>
+            <option>Default Shop</option>
+            <option>Short by price</option>
+            <option>Short by popularity</option>
+            <option>Short by Rating</option>
+            <option>Short by Sale</option>
+        </select>
+    </div>
+
+    <div class="product-admin order-admin">
+        <div class="product-admin-items" style="font-weight: bold">
+            <h4 class="name" style="font-weight: bold">ID</h4>
+            <p class="price">Price</p>
+            <p class="status">status</p>
+            <p class="type">Type</p>
+            <p class="function">Function</p>
+            <p class="detail">Order Details</p>
+        </div>
+        {{#each orders}}
+        <div class="product-admin-items" style="position: relative">
+            <h4 class="name">{{this._id}}</h4>
+            <p class="price">${{this._price}}</p>
+            <p class="price">{{this._status}}</p>
+            <p class="price">{{this._type}}</p>
+            <div class="function">
+                <a href="/product/edit/{{this._id}}" class="edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                <form method="post" action="/product/destroy?id={{this._id}}" onsubmit="return confirm('Are you sure you want to delete this?');" class="delete" >
+                    <button type="submit" value="Submit"><i class="fa-solid fa-trash"></i></button>
+                </form>
+            </div>
+            <div class="detail">
+                  <button onclick="showOrderDetails({{this._id}})" class="dropbtn detai-btn-{{this._id}}">Dropdown</button>
+            </div>
+            <div class="order-detail" id="detail-{{this._id}}">
+                {{#each this.orderDetails}}
+                <a href="" class="order-detail-item">
+                    <p >{{this._id}}</p>
+                    <p>{{this._price}}</p>
+                    <p>{{this._qty}}</p>
+                    <p>{{this._size}}</p>
+                </a>
+                {{/each}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    <div class="page-btn">
+        {{#each indexPage}}
+        <span><a href="?page={{this}}">{{this}}</a></span>
+        {{/each}}
+        <span>&#8594;</span>
+    </div>
+</div>
+
+<script>
+function showOrderDetails(id) {
+  document.getElementById("detail-"+ id).classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("order-detail");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>

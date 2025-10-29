@@ -122,7 +122,6 @@ h1 {
     .function{
       display: flex;
       justify-content: center;
-      align-items: center;
       column-gap: 15px;
       .delete{
         button{
@@ -133,4 +132,56 @@ h1 {
       }
     }
   }
+}
+.order-admin {
+  .product-admin-items{
+      grid-template-areas: "id price status type function detail";
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+  .dropbtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 0%;
+    width: 100px;
+    height: 40px;
+  }
+
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: #2980B9;
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .show {display: block;}
+}
+.order-detail {
+  position: absolute;
+  left: 0;
+  top: 50px;
+  display: none;
+  width: 100%;
+  background-color: antiquewhite;
+  text-align: center;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  .order-detail-item {
+    display: grid;
+    grid-template-areas: "item item item item";
+    grid-template-columns: 1fr 2fr 2fr 2fr;
+    p {
+      border: 1px solid #000;
+    }
+  }
+
 }

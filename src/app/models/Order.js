@@ -7,7 +7,8 @@ const OrderSchema = new Schema({
   _user_id: Number,
   _price: Number,
   _status: String,
-  _type: String
+  _type: String,
+  orderDetails: { type: mongoose.Schema.Types.Array, ref: 'OrderDetail' }
 },
 {
   timestamps: true,

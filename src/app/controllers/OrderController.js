@@ -73,6 +73,7 @@ class OrderController {
     }
 
     async addToCart(req, res) {
+
         const formData = req.body;
         const user = res.locals.user;
         let existOder =  Order.findOne({'_user_id': user._id, '_status': 'pending'});
@@ -85,51 +86,33 @@ class OrderController {
         var notification = responseNotification.response('success', 'Add cart success', 'cart');
 
         if(existOder){
-            console.log('aaaa')
-            const existOderDetail = await OrderDetail.findOne({'_order_id': existOder._id, '_product_id': formData._product_id, '_size': formData._size});
-            formData._order_id = existOder._id;
-            formData.product = formData._product_id;
+            const existOderDetail = await OrderDetail.findOne({'order': existOder._id, 'product': formData._product_id, '_size': formData._size});
             const newOrderDetail = new OrderDetail(formData);
-            existOder._price += formData._price;
+            newOrderDetail.order = existOder._id
+            newOrderDetail.product = formData._product_id;
+            const price = existOder._price + formData._price;
+            const updatePrice = existOder.updateOne({'_price': price});
 
             try {
+                let solution = '';
                 if(existOderDetail) {
                     existOderDetail._price += formData._price;
                     existOderDetail._qty += qty;
-                    await existOderDetail.save();
+                    solution = existOderDetail.save();
                 }
                 else {
-                    await newOrderDetail.save().then(order => {
-                        console.log(order);
-                    }
-                        
-                    );
+                    await newOrderDetail.save().then(async order => {
+                        solution = existOder.updateOne({$push: {orderDetails : order._id}})                    
+                    });
                 }
-                await existOder.save()
+
+                await Promise.all([updatePrice, solution]);
             }
             catch(error) {
                 console.log(error);
                 notification.type = 'error';
                 notification.text = 'Update order fail';
             }
-            
-            // newOrderDetail.save(formData).then(() =>
-            //     existOder.save()
-            //     .then(() => 
-            //         req.flash('notification', notification))
-            //     .catch(error => {
-            //         console.log(error);
-            //         notification.type = 'error';
-            //         notification.text = 'Update order fail';
-            //     })
-            // )
-            // .catch(
-            //     error => {
-            //         console.log(error);
-            //         notification.type = 'error';
-            //         notification.text = 'Add to cart fail';
-            //     }
-            // )
 
             req.flash('notification', notification);
             res.redirect('/product/detail/'+ formData._product_id)
@@ -137,7 +120,6 @@ class OrderController {
         else{
             const newOrder = new Order;
             const newOrderDetail = new OrderDetail(formData);
-            console.log('bbbb')
             
             newOrder._user_id = user._id;
             newOrder._price = formData._price;
@@ -145,10 +127,12 @@ class OrderController {
             newOrder._type = '';
             try {
                 await newOrder.save().then(async order => {
-                    newOrderDetail._order_id = order._id,
-                    newOrderDetail.product = formData._product_id
-                    await newOrderDetail.save()
+                    newOrderDetail.order = order._id,
+                    newOrderDetail.product = formData._product_id,
+                    await newOrderDetail.save();
                 })
+
+                await newOrder.updateOne({$push: {orderDetails : newOrderDetail._id}})
 
             }
             catch(error) {
@@ -156,24 +140,6 @@ class OrderController {
                 notification.type = 'error';
                 notification.text = 'Add to cart fail';
             }
-            // newOrder.save().then(order => {
-            //     newOrderDetail._order_id = order._id
-            //     newOrderDetail.save()
-            //     .then(() => 
-            //         req.flash('notification', notification))
-            //     .catch(error => {
-            //         console.log(error);
-            //         notification.type = 'error';
-            //         notification.text = 'Add to cart fail';
-            //     })
-            // })
-            // .catch(
-            //     error => {
-            //         console.log(error);
-            //         notification.type = 'error';
-            //         notification.text = 'Create order fail';
-            //     }
-            // )
 
             req.flash('notification', notification);
             res.redirect('/product/detail/'+ formData._product_id)
@@ -197,7 +163,7 @@ class OrderController {
                 item._price = item.product._price * value;
                 await item.save();
             }
-            const orderDetails = await OrderDetail.find({'_order_id': order_id})
+            const orderDetails = await OrderDetail.find({'order': order_id})
             console.log(orderDetails)
             console.log(Object.keys(orderDetails).length)
             let total = 0;
@@ -236,6 +202,92 @@ class OrderController {
         res.redirect('/home')
 
     }
+
+    //Admin
+    orderAdmin(req, res, next) {
+        const page = parseInt(req.query.page) || 1; // Default to page 1
+        const limit = parseInt(req.query.limit) || 8; // Default to 10 items per page
+        const skip = (page - 1) * limit;
+        let orders = Order.find({}).populate('orderDetails');
+        const maxPage = orders ? Math.round(Object.keys(orders).length / limit) : 1;
+        let indexPage = [];
+        for(let i = 1; i <= maxPage; i++) {
+            indexPage.push(i);
+        }
+
+        orders.skip(skip).limit(limit)
+            .then(orders => {
+                res.render('orders_admin', { 
+                    orders: mutipleMongooseToObject(orders),
+                    indexPage: indexPage
+                })
+            })
+            .catch(next);
+    }
+
+    insert(req, res) {
+            const formData = req.body;
+            var notification = responseNotification.response('success', 'Create order success', 'order');
+            const newOrder = new Order(formData);
+            req.flash('notification', notification);
+            newOrder.save()
+                .then(() => res.redirect('/order/create'))
+                .catch(error => {
+                    console.log(error);
+            });
+        }
+    
+        edit(req, res, next) {
+            var order = Order.findById(req.params.id);
+            var notification = req.flash('notification');
+            notification = notification ? notification[0] : notification;
+            order.then(
+                order => {
+                    res.render('order_edit', {
+                        order: mongooseToObject(order),
+                        notification: notification
+                    })
+                })
+                .catch(next)
+        }
+    
+        async update(req, res) {
+            const formData = req.body;
+            var order = await Order.findById(req.params.id);
+            var notification = responseNotification.response('success', 'Update order success', 'order');
+            req.flash('notification', notification);
+            await order.updateOne(formData)
+                .then(() => res.redirect('/order/admin'))
+                .catch(error => {
+                    console.log(error);
+            });
+        }
+    
+        async destroy(req, res) {
+            var order = await Order.findById(req.params.id);
+            var notification = responseNotification.response('success', 'Destroy order success', 'order');
+            req.flash('notification', notification);
+             await order.deleteOne()
+                .then(() => res.redirect('/order/admin'))
+                .catch(error => {
+                    console.log(error);
+            });
+        }
+    
+        async copy(req, res) {
+                var order = await Order.findById(req.params.id).select('_name _desc _category _brand _price _img');
+                order = mongooseToObject(order);
+                delete order._id;
+                var notification = responseNotification.response('success', 'Copy order success', 'order');
+                req.flash('notification', notification);
+                const newOrder = new Order(order);
+                console.log(newOrder)
+                await newOrder.save()
+                    .then(() => res.redirect('/order/admin'))
+                    .catch(error => {
+                        console.log(error);
+            });
+        }
 }
 
 

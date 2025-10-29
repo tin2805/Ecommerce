@@ -4,11 +4,11 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 const Schema = mongoose.Schema;
 
 const OrderDetailSchema = new Schema({
-  _order_id: Number,
   _product_id: Number,
   _price: Number,
   _qty: Number,
   _size: String,
+  order: { type: mongoose.Schema.Types.Number, ref: 'Order' },
   product: { type: mongoose.Schema.Types.Number, ref: 'Product' }
 },
 {

@@ -41,7 +41,7 @@ const checkUser = async (req, res, next) => {
                 let user = await User.findById(decodedToken.id);
                 let allItem = 0;
                 let orderPending = await Order.findOne({'_user_id': decodedToken.id, '_status' : 'pending'});
-                let orderDetails = await OrderDetail.find({'_order_id': orderPending ? orderPending._id : 0});
+                let orderDetails = await OrderDetail.find({'order': orderPending ? orderPending._id : 0});
                 allItem = Object.keys(orderDetails).length;
                 user = user.toObject();
                 user.cart = allItem;
