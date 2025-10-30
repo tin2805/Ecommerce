@@ -7,6 +7,8 @@ var cookieParser = require('cookie-parser');
 var flash = require('connect-flash');
 const fileUpload = require("express-fileupload");
 const dotenv = require("dotenv");
+const cron = require('node-cron');
+const fetch = require('node-fetch');
 
 dotenv.config();
 const app = express();
@@ -51,6 +53,23 @@ app.use(fileUpload());
 
 //Routes init
 route(app);
+
+// Replace with your Render application URL
+const appUrl = process.env.RENDER_URL;
+
+// Define the cron job to run every 14 minutes
+cron.schedule('*/14 * * * *', async () => {
+  try {
+    const response = await fetch(appUrl);
+    if (response.ok) {
+      console.log(`[${new Date().toISOString()}] Ping successful. Server is awake.`);
+    } else {
+      console.error(`[${new Date().toISOString()}] Ping failed with status: ${response.status}`);
+    }
+  } catch (error) {
+    console.error(`[${new Date().toISOString()}] Ping failed:`, error.message);
+  }
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

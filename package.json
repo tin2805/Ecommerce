@@ -23,6 +23,8 @@
     "mathjs": "^15.0.0",
     "mongoose": "^8.18.3",
     "mongoose-sequence": "^6.0.1",
+    "node-cron": "^4.2.1",
+    "node-fetch": "^3.3.2",
     "sass": "^1.93.2"
   },
   "devDependencies": {
