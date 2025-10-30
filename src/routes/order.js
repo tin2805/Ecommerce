@@ -3,7 +3,6 @@ const router = express.Router();
 const orderController = require('../app/controllers/OrderController');
 const { checkAdmin } = require('../app/middleware/adminMiddleware');
 
-router.get('/copy/:id', checkAdmin, orderController.copy);
 router.post('/destroy/:id', checkAdmin, orderController.destroy);
 router.post('/update/:id', checkAdmin, orderController.update);
 router.get('/edit/:id', checkAdmin, orderController.edit);

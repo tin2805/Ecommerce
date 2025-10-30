@@ -35,7 +35,7 @@
             <p class="price">${{this._price}}</p>
             <div class="function">
                 <a href="/product/edit/{{this._id}}" class="edit"><i class="fa-solid fa-pen-to-square"></i></a>
-                <form method="post" action="/product/destroy?id={{this._id}}" onsubmit="return confirm('Are you sure you want to delete this?');" class="delete" >
+                <form method="post" action="/product/destroy/{{this._id}}" onsubmit="return confirm('Are you sure you want to delete this?');" class="delete" >
                     <button type="submit" value="Submit"><i class="fa-solid fa-trash"></i></button>
                 </form>
                 <a href="/product/copy/{{this._id}}"><i class="fa-solid fa-copy"></i></a>

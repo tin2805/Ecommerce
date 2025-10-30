@@ -27,11 +27,9 @@
                         <a href="/order/cart" class="cart">Cart <span>{{user.cart}}</span></a>
                         {{#if_eq user.role 'admin'}}
                         <a href="/product/create">Create Product</a>
-                        <a href="/product/all">All Products</a>
-                        <a href="/order/create">Create Order</a>
-                        <a href="/order/all">All Orders</a>
+                        <a href="/product/admin">Products Admin</a>
+                        <a href="/order/admin">Orders Admin</a>
                         {{/if_eq}}
-                        <a href="/order">Order</a>
                         <a href="/account/logout">Logout</a>
                     </div>
                 </div>

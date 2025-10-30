@@ -9,7 +9,7 @@
         <tr id="item_{{this._id}}">
             <td>
                 <div class="cart-info">
-                    <img src="/uploads/{{this.product._img}}">
+                    <img src="/img/uploads/{{this.product._img}}">
                     <div>
                         <p>Red Printed Tshirt</p>
                         <small>Price: ${{this.product._price}}</small>
@@ -41,10 +41,11 @@
         </table>
 
     </div>
-
+    {{#if submitBtn}}
     <div class="order_btn">
         <a href="/order/cart/confirm" >Order</a>
     </div>
+    {{/if}}
 
 </div>
 

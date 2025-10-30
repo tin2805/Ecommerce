@@ -47,6 +47,8 @@ class ProductsController {
     //Admin
 
     productAdmin(req, res, next) {
+        var notification = req.flash('notification');
+        notification = notification ? notification[0] : notification;
         const page = parseInt(req.query.page) || 1; // Default to page 1
         const limit = parseInt(req.query.limit) || 8; // Default to 10 items per page
         const skip = (page - 1) * limit;
@@ -60,7 +62,8 @@ class ProductsController {
             .then(products => {
                 res.render('product_admin', { 
                     products: mutipleMongooseToObject(products),
-                    indexPage: indexPage
+                    indexPage: indexPage,
+                    notification: notification
                 })
             })
             .catch(next);
