@@ -8,7 +8,6 @@ var flash = require('connect-flash');
 const fileUpload = require("express-fileupload");
 const dotenv = require("dotenv");
 const cron = require('node-cron');
-const fetch = require('node-fetch');
 
 dotenv.config();
 const app = express();
